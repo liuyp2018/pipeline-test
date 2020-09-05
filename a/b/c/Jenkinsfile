@@ -1,0 +1,32 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: nodejs
+    image: node:10-alpine
+    command:
+    - cat
+    tty: true
+"""
+   }}
+   stages {
+      stage('checkout') {
+         steps {
+            git branch: 'master', url: "https://github.com/vuejs/vue"
+         }
+      }
+      stage('install') {
+         steps {
+            container('nodejs') {
+               cache(caches: [[$class: 'ArbitraryFileCache', excludes: '', includes: '**/*', path: 'node_modules']], maxCacheSize: 512) {
+                     sh "npm install"
+               }
+            }
+         }
+      }
+   }
+}

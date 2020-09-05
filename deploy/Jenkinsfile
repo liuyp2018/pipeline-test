@@ -1,0 +1,21 @@
+pipeline {
+  agent {
+    node {
+      label 'maven'
+    }
+  }
+
+    stages {
+        stage ('checkout scm') {
+            steps {
+                checkout(scm)
+            }
+        }
+
+        stage('deploy to production') {
+          steps {
+            kubernetesDeploy(kubeconfigId: 'deployid', configs: 'deploy/yaml/**')
+          }
+        }
+    }
+}

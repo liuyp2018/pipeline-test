@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubesphere.io/workspace: system-workspace
+  name: pipeline-test
+status:
+  phase: Active

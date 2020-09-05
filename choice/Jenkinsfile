@@ -1,0 +1,24 @@
+pipeline {
+   //agent {label 'local-slave'}
+   agent any
+   
+   environment { 
+        def registry_url = "hub.xxx.com"
+		def imageName = "${group_id}/${project_name}"
+		def build_tag = "${registry_url}/${group_id}/${project_name}:${img_tag}"
+    }
+    parameters {
+        choice(choices: 'A\nB', description: '测试一下', name: 'project_name')
+        choice(choices: 'RD\nQA\nPRE\nONLINE', description: '环境选择', name: 'runer_env')
+        choice(choices: '发布\n回滚', description: '动作选择', name: '执行动作')
+        //string(name:'git_url',defaultValue: 'xxxx',description: 'git工程路径')
+        string(name:'group_id', defaultValue: 'idc', description: '业务小组')
+    }
+    stages {
+        stage('build') {
+            steps {
+                echo "Hello World!"
+            }
+        }
+    }
+}
