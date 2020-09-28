@@ -17,7 +17,7 @@ pipeline {
         
         stage('应用部署') {
             steps {
-                kubernetesDeploy(configs: 'deploy/yaml/ns.yaml', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
+                kubernetesDeploy(configs: 'deploy/yaml/default-nginx.yaml', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
             }
         }
   }
