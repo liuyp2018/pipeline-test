@@ -1,0 +1,24 @@
+pipeline {
+    agent {
+        kubernetes {
+            yamlFile 'deploy/podtemplate.yaml'
+        }
+    }
+    environment {
+        KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'
+    }
+
+    stages {
+        stage ('checkout scm') {
+            steps {
+                checkout(scm)
+            }
+        }
+        
+        stage('应用部署') {
+            steps {
+                kubernetesDeploy(configs: 'deploy/yaml/ns.yaml', enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID")
+            }
+        }
+  }
+}
