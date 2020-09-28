@@ -5,6 +5,11 @@ metadata:
     mylabel: myvalue
 spec:
   containers:
+  - name: jnlp
+    image: jenkinsci/jnlp-slave:3.10-1-alpine
+    command:
+    - cat
+    tty: true
   - name: maven
     image: maven:3.3.9-jdk-8-alpine
     command:
