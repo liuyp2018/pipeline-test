@@ -13,6 +13,7 @@ pipeline {
         choice(choices: '发布\n回滚', description: '动作选择', name: '执行动作')
         //string(name:'git_url',defaultValue: 'xxxx',description: 'git工程路径')
         string(name:'group_id', defaultValue: 'idc', description: '业务小组')
+	booleanParam(name: 'refresh', description: '通过 Gradle --refresh-dependencies 参数进行 Jar 包强制刷新')
     }
     stages {
         stage('build') {
