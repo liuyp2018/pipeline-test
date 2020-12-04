@@ -5,9 +5,19 @@ on:
 
 jobs:
   hello:
-    runs-on: self-hosted
+    runs-on: ubuntu-test
     steps:
-      - uses: actions/checkout@v2
+      - name: Creating kind cluster
+        uses: helm/kind-action@v1.0.0-rc.1
+ 
+      - name: Print cluster information
+        run: |
+           kubectl config view
+           kubectl cluster-info
+           kubectl get nodes
+           kubectl get pods -n kube-system
+           helm version
+           kubectl version
 
       - name: Run a multi-line script
         run: |
