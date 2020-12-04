@@ -5,7 +5,7 @@ on:
 
 jobs:
   hello:
-    runs-on: ubuntu-test
+    runs-on: ubuntu-latest
     steps:
       - name: Creating kind cluster
         uses: helm/kind-action@v1.0.0-rc.1
