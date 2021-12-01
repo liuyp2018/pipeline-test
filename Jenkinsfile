@@ -17,7 +17,7 @@ spec:
     string(name: 'BRANCH_NAME', defaultValue: 'master', description: '')
   }
    stages {
-      stage('Hello') {
+      stage('Hello-1') {
          steps {
             container('maven') {
               sh "echo `date` >> newfile.txt"
